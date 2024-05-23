@@ -1,0 +1,8 @@
+
+
+export const AuthActionTypes = {
+  REGISTER_USER: "REGISTER_USER",
+  LOGIN_USER: "LOGIN_USER",
+  SET_USER: "SET_USER",
+  LOGOUT_USER: "LOGOUT_USER"
+}
