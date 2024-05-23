@@ -5,6 +5,7 @@ import { IAppState, ProductAction } from "./types";
 
 const INITIAL_STATE: IAppState = {
   productList: [],
+  searchList: []
 };
 
 const productReducer = (state = INITIAL_STATE, action: ProductAction) => {
@@ -12,13 +13,15 @@ const productReducer = (state = INITIAL_STATE, action: ProductAction) => {
     case ProductActionTypes.SET_PRODUCTLIST:
       return {
         ...state,
-        productList: action.payload
+        productList: action.payload,
+        searchList: action.payload
       }
     case ProductActionTypes.SEARCH_PRODUCTLIST:
       let searchQuery = action.payload ?? "";
+      debugger
       return {
         ...state,
-        productList: state.productList.filter((prod) => prod.title.toLowerCase().includes(searchQuery))
+        searchList: state.productList.filter((prod) => prod.title.toLowerCase().includes(searchQuery))
       }
     default:
       return state;

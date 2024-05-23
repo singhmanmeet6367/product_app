@@ -14,7 +14,6 @@ const config = {
 
 export const checkAuthAndCallAPI = () => {
   let token = localStorage.getItem('token')
-  debugger
   if (token !== null) {
     return true
   }
@@ -59,7 +58,6 @@ export const addToCartAPI = async (id: number, quantity: number) => {
   try {
     let check = checkAuthAndCallAPI();
     if (!check) { return }
-    debugger
 
     const response = await axios.post<TCartAPIResponse>(`${baseUrl}/cart`, { id, quantity }, config);
     store.dispatch(ErrorActionCreator.setAPIError(""))
@@ -101,3 +99,31 @@ export const loginUserApi = async (email: string, password: string) => {
     return
   }
 };
+
+
+export const getUserFromTokenAPI = async () => {
+  try {
+    let check = checkAuthAndCallAPI();
+    if (!check) { return }
+    const response = await axios.get(`${baseUrl}/auth/me`, config)
+    store.dispatch(ErrorActionCreator.setAPIError(""))
+    return response?.data
+  } catch (error: any) {
+    let err = error?.response?.data?.message
+    store.dispatch(ErrorActionCreator.setAPIError(err))
+  }
+}
+
+
+export const getCartItemsAPI = async () => {
+  try {
+    let check = checkAuthAndCallAPI();
+    if (!check) { return }
+    const response = await axios.get(`${baseUrl}/cart`, config)
+    store.dispatch(ErrorActionCreator.setAPIError(""))
+    return response?.data
+  } catch (error: any) {
+    let err = error?.response?.data?.message
+    store.dispatch(ErrorActionCreator.setAPIError(err))
+  }
+}

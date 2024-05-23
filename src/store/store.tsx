@@ -15,11 +15,12 @@ import { TProductList } from "./product/types";
 
 export interface IRootState {
   product: {
-    productList: TProductList
+    productList: TProductList,
+    searchList: TProductList
   },
   cart: {
     count: number,
-    cartItem: TCartItem[]
+    cartItems: TCartItem[]
   },
   auth: {
     user: TUser

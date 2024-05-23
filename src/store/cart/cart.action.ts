@@ -15,3 +15,8 @@ export const setCartItems = (payload: TCartAPIResponse) => {
   }
 }
 
+export const getCartItems = () => {
+  return {
+    type: CartActionTypes.GET_CART_ITEMS
+  }
+}

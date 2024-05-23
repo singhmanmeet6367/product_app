@@ -28,3 +28,8 @@ export const logoutUser = () => {
     type: AuthActionTypes.LOGOUT_USER
   }
 }
+export const getUserFromToken = () => {
+  return {
+    type: AuthActionTypes.GET_USER
+  }
+}

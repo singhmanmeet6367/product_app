@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TUser } from '../store/auth/types';
@@ -12,6 +12,14 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ cartCount }) => {
   const dispatch = useDispatch();
   const user = useSelector<IRootState>((state) => state.auth.user) as TUser
+  const token = localStorage.getItem("token")
+  useEffect(() => {
+    if (token !== null && user && user.id == "") {
+      dispatch(AuthActionCreator.getUserFromToken())
+
+    }
+
+  }, [token, user])
   const handleLogout = () => {
     dispatch(AuthActionCreator.logoutUser())
   }
@@ -27,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount }) => {
           Cart
           {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
         </Link>
-        {user && user.id ?
+        {user && user.id && token !== null ?
           <a onClick={handleLogout} className={styles.navLink}>
             Logout
           </a> :

@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import { loginUserApi, registerUserAPI } from "../../services/api";
+import { getUserFromTokenAPI, loginUserApi, registerUserAPI } from "../../services/api";
 import { AuthActionTypes } from "./auth.types";
-import { TLogin, TRegister, TRegisterAPIResponse } from "./types";
+import { TLogin, TRegister, TRegisterAPIResponse, TUser } from "./types";
 import * as AuthActionCreator from "./auth.action";
 
 function* registerUserSaga(action: { type: string, payload: TRegister }) {
@@ -22,7 +22,13 @@ function* loginUserSaga(action: { type: string, payload: TLogin }) {
   }
 }
 
+function* getUserSaga() {
+  let res: TUser = yield call(getUserFromTokenAPI)
+  debugger
+}
+
 export function* AuthSaga() {
   yield takeEvery(AuthActionTypes.REGISTER_USER, registerUserSaga)
   yield takeEvery(AuthActionTypes.LOGIN_USER, loginUserSaga)
+  yield takeEvery(AuthActionTypes.GET_USER, getUserSaga)
 }

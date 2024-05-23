@@ -14,7 +14,6 @@ const INITIAL_STATE: TErrorState = {
 const errorReducer = (state = INITIAL_STATE, action: TErrorAction) => {
   switch (action.type) {
     case ErrorActionType.SET_ERROR:
-      debugger
       return {
         ...state,
         message: action.payload

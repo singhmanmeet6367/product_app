@@ -9,11 +9,11 @@ import styles from "./ProductList.module.css"
 
 function ProductList() {
   const dispatch = useDispatch()
-  const prodList = useSelector<IRootState>(state => state.product.productList) as TProductList
   const [currentPage, setCurrentPage] = useState(1);
   const [pSize, setPSize] = useState(10);
   const [validParams, setValidParams] = useState<boolean>(true);
   const { page, pageSize } = useParams<{ page?: string, pageSize?: string }>();
+  const prodList = useSelector<IRootState>(state => state.product.searchList) as TProductList
   // useEffect(() => {
   //   dispatch(ProductActionCreator.getProductList())
   // }, [])

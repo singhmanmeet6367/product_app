@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import ProductList from './components/ProductList';
 import BadRequest from './components/BadRequest';
 import Auth from './components/Auth';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/products/1/10" />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path='/products/:page/:pageSize' element={<ProductList />} />
           <Route path="/bad-request" element={<BadRequest />} />
           {/* <Redirect to="/bad-request" /> */}
