@@ -24,7 +24,6 @@ function* loginUserSaga(action: { type: string, payload: TLogin }) {
 
 function* getUserSaga() {
   let res: TUser = yield call(getUserFromTokenAPI)
-  debugger
 }
 
 export function* AuthSaga() {

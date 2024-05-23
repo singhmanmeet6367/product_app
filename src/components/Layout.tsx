@@ -31,7 +31,6 @@ function Layout({ children }: LayoutProps) {
 
   useEffect(() => {
     if (errorStr !== "") {
-      debugger
       toast.error(`${errorStr}`, {
         position: 'top-right'
       })

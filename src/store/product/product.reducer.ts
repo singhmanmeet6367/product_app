@@ -18,7 +18,6 @@ const productReducer = (state = INITIAL_STATE, action: ProductAction) => {
       }
     case ProductActionTypes.SEARCH_PRODUCTLIST:
       let searchQuery = action.payload ?? "";
-      debugger
       return {
         ...state,
         searchList: state.productList.filter((prod) => prod.title.toLowerCase().includes(searchQuery))

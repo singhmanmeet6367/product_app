@@ -5,6 +5,8 @@ import { TUser } from '../store/auth/types';
 import { IRootState } from '../store/store';
 import styles from './Header.module.css'; // Import styles
 import * as AuthActionCreator from "../store/auth/auth.action"
+import * as CartActionCreator from "../store/cart/cart.action"
+import { TCartAPIResponse } from '../store/cart/types';
 interface HeaderProps {
   cartCount: number;
 }
@@ -22,6 +24,11 @@ const Header: React.FC<HeaderProps> = ({ cartCount }) => {
   }, [token, user])
   const handleLogout = () => {
     dispatch(AuthActionCreator.logoutUser())
+    let cartLogout: TCartAPIResponse = {
+      count: 0,
+      resources: []
+    }
+    dispatch(CartActionCreator.setCartItems(cartLogout))
   }
   return (
     <header className={styles.header}>

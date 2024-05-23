@@ -19,7 +19,6 @@ function ProductItem({ key, product }: ProductItemProps) {
   };
 
   const handleAddToCart = () => {
-    debugger
     dispatch(CartActionCreator.addToCart(product.id, quantity))
   }
   return (

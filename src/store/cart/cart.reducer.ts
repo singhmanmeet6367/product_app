@@ -10,7 +10,6 @@ const INITIAL_STATE: TCartStore = {
 const cartReducer = (state = INITIAL_STATE, action: TCartAction) => {
   switch (action.type) {
     case CartActionTypes.SET_CART_ITEMS:
-      debugger
       return {
         ...state,
         cartItems: action.payload?.resources,
