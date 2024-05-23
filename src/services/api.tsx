@@ -127,3 +127,24 @@ export const getCartItemsAPI = async () => {
     store.dispatch(ErrorActionCreator.setAPIError(err))
   }
 }
+
+
+export const updateCartAPI = async (id: number, quantity: number) => {
+  try {
+    let check = checkAuthAndCallAPI();
+    if (!check) { return }
+    const response = await axios.put(`${baseUrl}/cart`, { id, quantity }, config)
+    store.dispatch(ErrorActionCreator.setAPIError(""))
+    return response?.data
+  } catch (error: any) {
+    let err = error?.response?.data?.message
+    store.dispatch(ErrorActionCreator.setAPIError(err))
+  }
+}
+
+
+
+
+
+
+

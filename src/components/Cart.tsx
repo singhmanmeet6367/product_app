@@ -24,7 +24,8 @@ const Cart = () => {
   return (
     <div className={styles.listContainer}>
       {
-        cartItems && cartItems.length > 0 ? <CartListItem /> : <h2> No Products in Cart</h2>
+        cartItems && cartItems.length > 0 ?
+          cartItems.map((item) => <CartListItem key={`c{item.id}`} product={item} />) : <h2> No Products in Cart</h2>
       }
     </div>
   )

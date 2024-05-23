@@ -20,3 +20,10 @@ export const getCartItems = () => {
     type: CartActionTypes.GET_CART_ITEMS
   }
 }
+
+export const updateCartItems = (id: number, quantity: number) => {
+  return {
+    type: CartActionTypes.UPDATE_CART,
+    payload: { id, quantity } as TAddToCart
+  }
+}
