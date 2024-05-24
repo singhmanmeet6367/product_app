@@ -37,7 +37,7 @@ function Layout({ children }: LayoutProps) {
     }
   }, [errorStr])
 
-  const isSearch = location.pathname.toLowerCase().includes('auth') ? false : true
+  const isSearch = location.pathname.toLowerCase().includes('auth') || location.pathname.toLowerCase().includes("cart") ? false : true
   const cartCount = useSelector<IRootState>(state => state.cart.count) as number
   return (
     <div className={styles.layout}>

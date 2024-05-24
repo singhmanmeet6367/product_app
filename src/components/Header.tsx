@@ -15,13 +15,14 @@ const Header: React.FC<HeaderProps> = ({ cartCount }) => {
   const dispatch = useDispatch();
   const user = useSelector<IRootState>((state) => state.auth.user) as TUser
   const token = localStorage.getItem("token")
-  useEffect(() => {
-    if (token !== null && user && user.id == "") {
-      dispatch(AuthActionCreator.getUserFromToken())
-
-    }
-
-  }, [token, user])
+  const userID = localStorage.getItem("userID")
+  // useEffect(() => {
+  //   if (token !== null && user && user.id == "") {
+  //     dispatch(AuthActionCreator.getUserFromToken())
+  //
+  //   }
+  //
+  // }, [token, user])
   const handleLogout = () => {
     dispatch(AuthActionCreator.logoutUser())
     let cartLogout: TCartAPIResponse = {
@@ -42,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount }) => {
           Cart
           {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
         </Link>
-        {user && user.id && token !== null ?
+        {userID && userID !== null && token !== null ?
           <a onClick={handleLogout} className={styles.navLink}>
             Logout
           </a> :

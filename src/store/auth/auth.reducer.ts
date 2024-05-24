@@ -22,6 +22,7 @@ const authReducer = (state = INITIAL_STATE, action: any) => {
     case AuthActionTypes.LOGOUT_USER:
       localStorage.removeItem("token")
       localStorage.removeItem("refresh")
+      localStorage.removeItem("userID")
       return {
         ...state,
         user: {

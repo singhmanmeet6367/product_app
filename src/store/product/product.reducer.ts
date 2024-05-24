@@ -5,7 +5,20 @@ import { IAppState, ProductAction } from "./types";
 
 const INITIAL_STATE: IAppState = {
   productList: [],
-  searchList: []
+  searchList: [],
+  selectedProduct: {
+    id: -1,
+    title: "",
+    price: 0,
+    description: "", // Optional description
+    stock: 0,
+    category: "",
+    image: "",
+    rating: {
+      rate: 0,
+      count: 0
+    }
+  }
 };
 
 const productReducer = (state = INITIAL_STATE, action: ProductAction) => {
@@ -21,6 +34,11 @@ const productReducer = (state = INITIAL_STATE, action: ProductAction) => {
       return {
         ...state,
         searchList: state.productList.filter((prod) => prod.title.toLowerCase().includes(searchQuery))
+      }
+    case ProductActionTypes.SET_PRODUCT_DETAILS:
+      return {
+        ...state,
+        selectedProduct: action.payload
       }
     default:
       return state;

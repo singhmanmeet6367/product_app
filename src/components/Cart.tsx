@@ -12,8 +12,9 @@ const Cart = () => {
   const navigate = useNavigate()
   const cartItems = useSelector<IRootState>((state) => state.cart.cartItems) as TCartItem[]
   const token = localStorage.getItem("token")
+  const userId = localStorage.getItem("userID")
   useEffect(() => {
-    if (token !== null) {
+    if (token !== null && userId !== null) {
 
       dispatch(CartActionCreator.getCartItems())
     } else {

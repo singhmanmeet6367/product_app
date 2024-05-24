@@ -27,3 +27,11 @@ export const updateCartItems = (id: number, quantity: number) => {
     payload: { id, quantity } as TAddToCart
   }
 }
+
+export const deleteCartItems = (id: number) => {
+  debugger
+  return {
+    type: CartActionTypes.DELETE_CART_ITEM,
+    payload: id
+  }
+}

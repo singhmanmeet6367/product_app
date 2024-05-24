@@ -7,6 +7,7 @@ import ProductList from './components/ProductList';
 import BadRequest from './components/BadRequest';
 import Auth from './components/Auth';
 import Cart from './components/Cart';
+import ProductDescription from './components/ProductDescription';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Navigate to="/products/1/10" />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path='/products/:productID' element={<ProductDescription />} />
           <Route path='/products/:page/:pageSize' element={<ProductList />} />
           <Route path="/bad-request" element={<BadRequest />} />
           {/* <Redirect to="/bad-request" /> */}

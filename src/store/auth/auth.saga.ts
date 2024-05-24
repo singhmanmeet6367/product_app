@@ -3,6 +3,7 @@ import { getUserFromTokenAPI, loginUserApi, registerUserAPI } from "../../servic
 import { AuthActionTypes } from "./auth.types";
 import { TLogin, TRegister, TRegisterAPIResponse, TUser } from "./types";
 import * as AuthActionCreator from "./auth.action";
+import * as CartActionCreator from "../cart/cart.action";
 
 function* registerUserSaga(action: { type: string, payload: TRegister }) {
   let res: TRegisterAPIResponse = yield call(registerUserAPI, action.payload.name, action.payload.email, action.payload.password);
@@ -13,12 +14,14 @@ function* loginUserSaga(action: { type: string, payload: TLogin }) {
   if (res) {
     localStorage.setItem('token', res.token);
     localStorage.setItem('refresh', res.refreshToken)
+    localStorage.setItem('userID', res.id);
     let user = {
       name: res.name,
       email: res.email,
       id: res.id
     }
     yield put(AuthActionCreator.setUser(user))
+    yield put(CartActionCreator.getCartItems())
   }
 }
 

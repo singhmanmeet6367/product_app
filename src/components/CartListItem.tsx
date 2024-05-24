@@ -22,13 +22,16 @@ function CartListItem({ key, product }: TCartItemProps) {
     // setQuantity(newQuantity);
     dispatch(CartActionCreator.updateCartItems(product?.id, newQuantity))
   };
+  const handleDeleteItem = () => {
+    dispatch(CartActionCreator.deleteCartItems(product?.id))
+  }
   return (
     <div className={styles.productItem}>
 
       <img src={product.image} alt={product.title} />
       <h3>{product.title}</h3>
       <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
-      <div className="quantityWrapper">
+      <div className={styles.quantityWrapper}>
         <label htmlFor={`quantity-${product.id}`}>Quantity:</label>
         <button onClick={() => handleQuantityChange(-1)}>-</button>
         <input
@@ -39,6 +42,9 @@ function CartListItem({ key, product }: TCartItemProps) {
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
         <button onClick={() => handleQuantityChange(1)}>+</button>
+      </div>
+      <div className={styles.quantityWrapper}>
+        <button className={styles.addToCart} onClick={handleDeleteItem}>Delete</button>
       </div>
     </div>
   )

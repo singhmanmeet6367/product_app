@@ -4,13 +4,15 @@ import { IProduct } from '../store/product/types'
 import styles from "./ProductItem.module.css";
 import * as CartActionCreator from "../store/cart/cart.action"
 import { TAddToCart } from '../store/cart/types';
+import * as ErrorActionCreator from "../store/error/error.action"
+import { useNavigate } from 'react-router-dom';
 type ProductItemProps = {
   key: number,
   product: IProduct
 }
 
 function ProductItem({ key, product }: ProductItemProps) {
-
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const handleQuantityChange = (delta: number) => {
@@ -18,13 +20,27 @@ function ProductItem({ key, product }: ProductItemProps) {
     setQuantity(newQuantity);
   };
 
+  const userID = localStorage.getItem("userID")
   const handleAddToCart = () => {
-    dispatch(CartActionCreator.addToCart(product.id, quantity))
+
+    if (userID === null) {
+      return navigate("/auth")
+    }
+    else if (product.stock == 0 || quantity > product.stock) {
+      dispatch(ErrorActionCreator.setAPIError(`${product.title} is out of stock or quantity exceed stock`))
+    } else {
+      dispatch(ErrorActionCreator.setAPIError(""))
+      dispatch(CartActionCreator.addToCart(product.id, quantity))
+    }
+  }
+
+  const handleProductDetail = () => {
+    navigate(`/products/${product.id}`)
   }
   return (
     <div className={styles.productItem}>
-      <img src={product.image} alt={product.title} />
-      <h3>{product.title}</h3>
+      <img src={product.image} alt={product.title} onClick={handleProductDetail} />
+      <h3 onClick={handleProductDetail}>{product.title}</h3>
       <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
       <div>Category: {product.category}</div>
       <div>
@@ -39,7 +55,7 @@ function ProductItem({ key, product }: ProductItemProps) {
       {
 
       }
-      <div className="quantityWrapper">
+      <div className={styles.quantityWrapper}>
         <label htmlFor={`quantity-${product.id}`}>Quantity:</label>
         <button onClick={() => handleQuantityChange(-1)}>-</button>
         <input
@@ -50,7 +66,7 @@ function ProductItem({ key, product }: ProductItemProps) {
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
         <button onClick={() => handleQuantityChange(1)}>+</button>
-        <button onClick={handleAddToCart}>Add to Cart</button>
+        <button className={styles.addToCart} onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>)
 }

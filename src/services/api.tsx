@@ -41,9 +41,9 @@ export const getProductAPI = async (params?: { page?: number, size?: number }) =
 }
 
 
-export const getProductDetails = async (productId: number) => {
+export const getProductDetailsAPI = async (productId: number) => {
   try {
-    const response = await axios.get(`${baseUrl}/${productId}`)
+    const response = await axios.get(`${baseUrl}/products/${productId}`)
     store.dispatch(ErrorActionCreator.setAPIError(""))
     return response.data
 
@@ -53,6 +53,7 @@ export const getProductDetails = async (productId: number) => {
     return
   }
 }
+
 
 export const addToCartAPI = async (id: number, quantity: number) => {
   try {
@@ -105,7 +106,8 @@ export const getUserFromTokenAPI = async () => {
   try {
     let check = checkAuthAndCallAPI();
     if (!check) { return }
-    const response = await axios.get(`${baseUrl}/auth/me`, config)
+    const response = await axios.get(`${baseUrl}/auth/me`)
+    debugger
     store.dispatch(ErrorActionCreator.setAPIError(""))
     return response?.data
   } catch (error: any) {
@@ -142,7 +144,19 @@ export const updateCartAPI = async (id: number, quantity: number) => {
   }
 }
 
+export const deleteItemAPI = async (id: number) => {
+  try {
+    let check = checkAuthAndCallAPI();
+    if (!check) { return }
+    const response = await axios.delete(`${baseUrl}/cart/${id}`, config)
+    store.dispatch(ErrorActionCreator.setAPIError(""))
+    return response?.data
+  } catch (error: any) {
+    let err = error?.response?.data?.message
+    store.dispatch(ErrorActionCreator.setAPIError(err))
 
+  }
+}
 
 
 

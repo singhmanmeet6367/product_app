@@ -1,5 +1,5 @@
 import { ProductActionTypes } from "./product.types"
-import { TProductList } from "./types"
+import { IProduct, TProductList } from "./types"
 
 
 export const getProductList = () => {
@@ -20,4 +20,18 @@ export const searchProductList = (search: string) => {
     type: ProductActionTypes.SEARCH_PRODUCTLIST,
     payload: search
   }
-} 
+}
+
+export const getProductDetails = (productID: number) => {
+  return {
+    type: ProductActionTypes.GET_PRODUCT_DETAILS,
+    payload: productID
+  }
+}
+
+export const setProductDetails = (details: IProduct) => {
+  return {
+    type: ProductActionTypes.SET_PRODUCT_DETAILS,
+    payload: details
+  }
+}

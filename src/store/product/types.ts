@@ -24,6 +24,7 @@ export type ProductAction = {
 export interface IAppState {
   productList: IProduct[];
   searchList: IProduct[];
+  selectedProduct?: IProduct
 }
 
 export type APIResponseProduct = {

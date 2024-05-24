@@ -57,12 +57,16 @@
 
 .productItem.quantityWrapper{
   display: flex;
+  margin-top:20px;
   align-items: center;
 }
 
 
 .productItem .quantityWrapper label {
   margin-right: 5px;
+}
+.productItem .quantityWrapper input {
+  width:100px
 }
 
 .productItem .quantityWrapper button {
@@ -72,4 +76,7 @@
   cursor: pointer;
 }
 
-/* You can add further styles for hover, focus, etc. to the button here */
+.addToCart{
+  margin-top:20px;
+  width:100%;
+}

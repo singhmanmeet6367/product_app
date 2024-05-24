@@ -11,12 +11,13 @@ import { TCartItem } from "./cart/types";
 import errorReducer from "./error/error.reducer";
 import productReducer from "./product/product.reducer";
 import { productSagas } from "./product/product.saga";
-import { TProductList } from "./product/types";
+import { IProduct, TProductList } from "./product/types";
 
 export interface IRootState {
   product: {
     productList: TProductList,
-    searchList: TProductList
+    searchList: TProductList,
+    selectedProduct: IProduct
   },
   cart: {
     count: number,

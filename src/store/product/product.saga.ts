@@ -1,7 +1,7 @@
 import { ProductActionTypes } from "./product.types";
-import { takeEvery, call, put } from 'redux-saga/effects'
-import { getProductAPI } from "../../services/api";
-import { APIResponseProduct } from "./types";
+import { takeEvery, call, put, take } from 'redux-saga/effects'
+import { getProductAPI, getProductDetailsAPI } from "../../services/api";
+import { APIResponseProduct, IProduct } from "./types";
 import * as ProductActionCreator from "./product.action"
 function* getProductListSaga() {
 
@@ -17,9 +17,17 @@ function* getProductListSaga() {
 
 }
 
+function* getProductDetailsSaga(action: { type: string, payload: number }) {
+  const res: IProduct = yield call(getProductDetailsAPI, action.payload)
+  if (res) {
+    yield put(ProductActionCreator.setProductDetails(res))
+  }
+}
+
 
 export function* productSagas() {
 
   // tajkeevery acts as listner to the call
   yield takeEvery(ProductActionTypes.GET_PRODUCTLIST, getProductListSaga);
+  yield takeEvery(ProductActionTypes.GET_PRODUCT_DETAILS, getProductDetailsSaga);
 }
