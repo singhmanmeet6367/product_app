@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.0",
     "@vqb/products-server": "^1.0.1",
     "axios": "^1.7.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

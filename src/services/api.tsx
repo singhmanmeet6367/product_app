@@ -2,6 +2,8 @@ import axios from "axios";
 import { TRegister } from "../store/auth/types";
 import { TCartAPIResponse } from "../store/cart/types";
 import * as ErrorActionCreator from "../store/error/error.action";
+import * as AuthActionCreator from "../store/auth/auth.action";
+import { jwtDecode } from "jwt-decode";
 import store from "../store/store"
 const baseUrl = "http://localhost:3000"
 const token = localStorage.getItem('token');
@@ -13,9 +15,15 @@ const config = {
 
 
 export const checkAuthAndCallAPI = () => {
-  let token = localStorage.getItem('token')
+  let token = localStorage.getItem('refresh')
   if (token !== null) {
-    return true
+    let d = jwtDecode(token);
+    if (d && d.exp && Date.now() >= d?.exp * 1000) {
+      return store.dispatch(AuthActionCreator.logoutUser());
+    } else {
+      return true
+
+    }
   }
   else {
     let err = 'Token invalid'

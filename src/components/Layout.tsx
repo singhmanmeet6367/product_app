@@ -9,7 +9,6 @@ import * as ProductActionCreator from "../store/product/product.action"
 import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { error } from 'console';
 interface LayoutProps {
   children?: React.ReactNode; // Optional child elements (for potential future use)
 }

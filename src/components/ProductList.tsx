@@ -29,7 +29,7 @@ function ProductList() {
         setValidParams(false);
       }
     }
-  }, [page, pSize]);
+  }, [page, pageSize]);
   if (!validParams) {
     return <Navigate to="/bad-request" />;
   }
